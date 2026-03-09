@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Define Urself 18 Kira Essentials</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Helvetica', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            transition: transform 0.2s ease;
+            z-index: 2;
+        }
+        
+        /* Placeholder for your Stock Image */
+        .image-placeholder {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #444;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px;
+            width: 80%;
+            outline: none;
+            text-align: center;
+        }
+        input:focus {
+            border-bottom-color: #fff;
+        }
+        button {
+            margin-top: 20px;
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Animation for successful entry */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: successPulse 0.4s ease-out;
+        }
+
+        #response {
+            margin-top: 40px;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <div class="image-placeholder">
+            <img src="Zrzut ekranu 2026-03-09 143923.png">
+        </div>
+
+        <h1>Define Urself 18 Kira Essentials</h1>
+        <input type="text" id="artistInput" placeholder="Введіть ім'я виконавця..." autocomplete="off">
+        <br>
+        <button id="checkBtn">Check</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        const inputField = document.getElementById('artistInput');
+        const checkBtn = document.getElementById('checkBtn');
+        const container = document.getElementById('mainContainer');
+        const output = document.getElementById('response');
+
+        const groupA = [
+            "katy perry", "slayyyter", "chappell roan", "katseye", "pinkpantheress", 
+            "charli xcx", "taylor swift", "magdalena bay", "lady gaga", "ravyn lenae",
+            "sky ferreira", "kim petras", "billie eilish", "ayesha erotica", "ceechynaa",
+            "маша кондратенко", "ziferblat", "masha kondratenko", "ariana grande", "циферблат",
+            "doja cat", "megan thee stallion", "dua lipa", "fiona apple", "sabrina carpenter",
+            "muse", "addison rae", "clairo", "lorde", "holychild", "my chemical romance", 
+            "syd matters", "blanka", "lucy dacus"
+        ];
+
+        const groupB = ["renee rapp", "mitski", "wet leg", "the strokes", "jae stephens", "pj harvey", 
+            "florence welch", "florence + the machine", "florence+the machine"];
+
+        function checkArtist() {
+            const input = inputField.value.trim().toLowerCase();
+            
+            container.classList.remove('pulse');
+            void container.offsetWidth; 
+
+            if (groupA.includes(input)) {
+                output.innerHTML = "ТАК!!!";
+                container.classList.add('pulse');
+                
+                // Confetti with custom colors: Pink (#e59199) and Green (#b1c385)
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.7 },
+                    colors: ['#e59199', '#b1c385', '#ffffff']
+                });
+
+            } else if (groupB.includes(input)) {
+                output.innerHTML = "khia asylum..";
+            } else {
+                output.innerHTML = "well, no";
+            }
+        }
+
+        checkBtn.addEventListener('click', checkArtist);
+
+        inputField.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkArtist();
+            }
+        });
+    </script>
+</body>
+</html>
